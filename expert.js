@@ -224,6 +224,27 @@ app.get('/login',(req,res)=>{
     if(req.session.user){
         var user = req.session.user;
         console.log(user);
+		post.find({type:'Innovation'},(err, data)=> {
+            if(data)
+            {console.log(data);
+            res.render('expert/index',{post:data,farmer:user});}
+            else
+            res.send("no posts yet!");
+          })
+        }
+    else{
+        var resp =`
+        <script> alert('log in first');window.location.href='expert/login';</script>
+        `;
+        res.send(resp);   
+	}
+    //res.render('blog')
+})
+
+.get('/queryblog',(req,res)=>{
+    if(req.session.user){
+        var user = req.session.user;
+        console.log(user);
 		post.find({type:'Query'},(err, data)=> {
             if(data)
             {console.log(data);
