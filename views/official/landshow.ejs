@@ -14,6 +14,8 @@
 		<!-- Custom CSS -->
 		<link rel="stylesheet" href="../css/patros.css" >
 		
+		
+   
 	</head>
 
 	<body data-spy="scroll">
@@ -68,48 +70,95 @@
 				<img class="img-responsive displayed" src="../images/short.png" alt="short" />
 				<div class="text-center height-contact-element" style="overflow-y:scroll">
 			
-					<center><table class="table" cellpadding="10" border="1" >
-						<tr>
-							<th>Name</th>
-							<th>Gender</th>
-							<th>Mobile</th>
-							<th>Date Of Birth</th>
-							<th>Aadhar</th>
-							<th>Address</th>
-							<th>Pin code</th>
-						<th>Survey No</th>
-						<th>Crop</th>
-						<th>Annual Yield</th>
-						<th>Income</th>
-						<th>Season</th>
-						<th>City</th>
-						<th>District</th>
-					</tr>
-					<%for (var result in farmers){%>
-						
-						<!-- <li><%= farmers[result].surveyno %></li>    
-						 -->
-					<tr>
-						<td><%= farmers[result].fname %><%= farmers[result].mname %><%= farmers[result].lname %></td>
-						<td><%= farmers[result].gender %></td>
-						<td><%= farmers[result].mobno %></td>
-						<td><%= farmers[result].dob %></td>
-						<td><%= farmers[result].aadhar %></td>
-						<td><%= farmers[result].area %></td>
-						<td><%= farmers[result].pincode %></td>
-						<td><%= farmers[result].surveyno %> </td>
-						<td><%= farmers[result].cropname %> </td>
-						<td><%= farmers[result].cropyield %> </td>
-						<td><%= farmers[result].income %> </td>
-						<td><%= farmers[result].season %> </td>
-						<td><%= farmers[result].area %> </td>
-						<td><%= farmers[result].district %> </td>
-					</tr>
-					<%}%>
-					</table>
+					<center>
+					<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+					<div id="chart_div"></div>
+				 <br/>
+				 <!-- <div id="btn-group">
+				   <button class="button button-blue" id="none">No Format</button>
+				   <button class="button button-blue" id="scientific">Scientific Notation</button>
+				   <button class="button button-blue" id="decimal">Decimal</button>
+				   <button class="button button-blue" id="short">Short</button>
+				 </div> -->
+					<script>
+					      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['farmer', 'AnnualYield', 'Income'],
+          ['pranaliPandurangPawar', 30000, 20000],
+		  ['PoojasubhashMane', 400000, 300000],
+		  ['dimpaljitendrapatil',0,0],
+          ['swatiAshokraoKasar', 30000, 25000]
+        ]);
 
+        var options = {
+          chart: {
+            title: 'statistics-2019',
+            subtitle: 'Annual yield,income',
+          },
+          bars: 'horizontal', // Required for Material Bar Charts.
+          hAxis: {format: 'decimal'},
+          height: 200,
+          colors: ['#1b9e77', '#d95f02']
+        };
 
+        var chart = new google.charts.Bar(document.getElementById('chart_div'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+
+        var btns = document.getElementById('btn-group');
+
+        // btns.onclick = function (e) {
+
+        //   if (e.target.tagName === 'BUTTON') {
+        //     options.hAxis.format = e.target.id === 'none' ? '' : e.target.id;
+        //     chart.draw(data, google.charts.Bar.convertOptions(options));
+        //   }
+        // }
+      }
+					</script>
+<br><br><hr><br>
+<table class="table" cellpadding="10" border="1" >
+	<tr>
+		<th>Name</th>
+		<th>Gender</th>
+		<th>Mobile</th>
+		<th>Date Of Birth</th>
+		<th>Aadhar</th>
+		<th>Address</th>
+		<th>Pin code</th>
+	<th>Survey No</th>
+	<th>Crop</th>
+	<th>Annual Yield</th>
+	<th>Income</th>
+	<th>Season</th>
+	<th>City</th>
+	<th>District</th>
+</tr>
+<%for (var result in farmers){%>
+	
+	<!-- <li><%= farmers[result].surveyno %></li>    
+	 -->
+<tr>
+	<td><%= farmers[result].fname %><%= farmers[result].mname %><%= farmers[result].lname %></td>
+	<td><%= farmers[result].gender %></td>
+	<td><%= farmers[result].mobno %></td>
+	<td><%= farmers[result].dob %></td>
+	<td><%= farmers[result].aadhar %></td>
+	<td><%= farmers[result].area %></td>
+	<td><%= farmers[result].pincode %></td>
+	<td><%= farmers[result].surveyno %> </td>
+	<td><%= farmers[result].cropname %> </td>
+	<td><%= farmers[result].cropyield %> </td>
+	<td><%= farmers[result].income %> </td>
+	<td><%= farmers[result].season %> </td>
+	<td><%= farmers[result].area %> </td>
+	<td><%= farmers[result].district %> </td>
+</tr>
+<%}%>
+</table>
 
 					<!-- <ul class="list-unstyled list-inline list-social-icons">
 						<li class="active"><a href="#"><i class="fa fa-facebook social-icons"></i></a></li>
